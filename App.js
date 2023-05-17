@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingTop: 55,
     justifyContent: "center",
-  },root:{
+  },
+  root:{
     flex: 1,
   },
   red: {

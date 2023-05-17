@@ -38,16 +38,29 @@ const MaFlatlist = () => {
         setModalVisible(false);
     };
 
+    const updateGoal = (updatedGoal) => {
+        setGoals(sampleGoals => {
+          const updatedGoals = sampleGoals.map(item => {
+            if (item.key === selectedGoal) {
+              return { key: updatedGoal };
+            }
+            return item;
+          });
+          return updatedGoals;
+        });
+        closeModal();
+      };
+
     return (
         <View style={styles.container}>
             <View style={styles.row}>
                 <TextInput
-                    placeholder="Type here to add a line"
+                    placeholder="Ajouter une ligne"
                     onChangeText={(text) => setText(text)}
                     value={text}
                 />
-                <Pressable onPress={addGoal}>
-                    <Text style={styles.buttonAdd}>Add</Text>
+                <Pressable onPress={addGoal} style={styles.buttonAdd}>
+                    <Text style={styles.textBtn}>Add</Text>
                 </Pressable>
             </View>
             <FlatList
@@ -57,13 +70,14 @@ const MaFlatlist = () => {
                         <TouchableOpacity onPress={() => openModal(item.key)}>
                             <Text>{item.key}</Text>
                         </TouchableOpacity>
+                        
                         <TouchableOpacity onPress={() => deleteGoal(item.key)} style={styles.buttonDelete}>
-                            <Text style={styles.textBtnDel}>X</Text>
+                            <Text style={styles.textBtn}>X</Text>
                         </TouchableOpacity>
                     </View>
                 )}
             />
-            <MaModal visible={modalVisible} goal={selectedGoal} hidden={closeModal} />
+            <MaModal visible={modalVisible} goal={selectedGoal} hidden={closeModal} onSave={updateGoal} />
         </View>
     );
 };
@@ -91,16 +105,19 @@ const styles = StyleSheet.create({
         padding: 9,
         borderRadius: 6,
     },
-    textBtnDel: {
+    textBtn: {
         color: 'white',
     },
     row: {
         flexDirection: "row",
     },
     buttonAdd: {
-        padding: 10,
-        color: "blue",
-        fontSize: 18,
+        alignItems: "center",
+        backgroundColor: "#6F73D2",
+        marginBottom: 1,
+        marginLeft: 25,
+        padding: 9,
+        borderRadius: 6,
     },
 });
 
