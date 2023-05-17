@@ -1,87 +1,45 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
-  Button,
-  FlatList,
-  Pressable,
   StyleSheet,
   Text,
-  TextInput,
   View,
   Modal,
-  TouchableOpacity,
+  ImageBackground,
 } from "react-native";
+import MaFlatlist from "./components/maFlatList";
 
 export default function App() {
-  const [text, setText] = useState("");
-  const [sampleGoals, setGoals] = useState([
-    { key: "Faire les courses" },
-    { key: "Aller à la salle de sport 3 fois par semaine" },
-    { key: "Monter à plus de 5000m d'altitude" },
-    { key: "Acheter mon premier appartement" },
-    { key: "Perdre 5kgs" },
-    { key: "Gagner en productivité" },
-    { key: "Apprendre un nouveau langage" },
-    { key: "Faire une mission en freelance" },
-    { key: "Organiser un meetup autour de la tech" },
-    { key: "Faire un triathlon" },
-  ]);
-  const addGoal = () => {
-    text && setGoals([...sampleGoals, { key: text }]);
-  };
-  deleteGoal = (key) => {
-    setGoals(sampleGoals => sampleGoals.filter((item, i) => item.key !== key));
-  };
+
+  const img = {uri : "https://e0.pxfuel.com/wallpapers/206/460/desktop-wallpaper-i-made-some-from-mars-to-sirius-to-my-cell-phone-hope-you-guys-enjoy-it-gojira.jpg"};
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.red}>
-        Open up <Text style={styles.bold}>App.js</Text> to start working on your
-        app!
-      </Text>
-    <View style={styles.row}>
-      <TextInput
-        placeholder="Type here to add a line"
-        onChangeText={(text) => setText(text)}
-        value={text}
-      ></TextInput>
-      <Pressable onPress={addGoal}>
-        <Text style={styles.buttonAdd}>Add</Text>
-      </Pressable>
-    </View>
-      <FlatList
-        data={sampleGoals}
-        renderItem={({ item }) => (
-          <View style={styles.item}>
-            <Text>{item.key}</Text>
-            <TouchableOpacity onPress={()=>this.deleteGoal(item.key)} style={styles.buttonDelete}>
-              <Text style={styles.textBtnDel}>X</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-      />
-      <StatusBar style="auto" />
+    <View style={styles.root}>
+      <ImageBackground source={img} style={styles.container}>
+        <Text style={styles.red}>
+          Open up <Text style={styles.bold}>App.js</Text> to start working on your
+          app!
+        </Text>
+        <MaFlatlist />
+        <StatusBar style="auto" />
+      </ImageBackground>  
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0,
-    backgroundColor: "#D9F0FF",
+    flex: 1,
     alignItems: "center",
+    paddingTop: 55,
     justifyContent: "center",
-    paddingTop: 60,
+  },root:{
+    flex: 1,
   },
   red: {
     color: "red",
     fontSize: 18,
     marginBottom: 20
-  },
-  buttonAdd: {
-    padding: 10,
-    color: "blue",
-    fontSize: 18,
   },
   blue: {
     color: "blue",
@@ -90,27 +48,4 @@ const styles = StyleSheet.create({
   bold: {
     fontWeight: "bold",
   },
-  row: {
-    flexDirection: "row",
-  },
-  item: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: "white",
-    marginBottom: 15,
-    padding: 9,
-    borderRadius: 6,
-  },
-  buttonDelete: {
-    alignItems: "center",
-    backgroundColor: "#6F73D2",
-    marginBottom: 1,
-    marginLeft: 25,
-    padding: 9,
-    borderRadius: 6,
-  },
-  textBtnDel: {
-    color: 'white',
-  }
 });
