@@ -17,13 +17,15 @@ const MaModal = ({ visible, goal, hidden, onSave }) => {
                 value={editedGoal}
                 onChangeText={setEditedGoal}
             />
-            <Text style={styles.modalText}>{goal}</Text>
-            <TouchableOpacity onPress={save} style={styles.modalBtn}>
-            <Text style={styles.modalBtnText}>Save</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={hidden} style={styles.modalBtn}>
-            <Text style={styles.modalBtnText}>Cancel</Text>
-            </TouchableOpacity>
+                <Text style={styles.modalText}>{goal}</Text>
+            <View style={styles.row}>
+                <TouchableOpacity onPress={save} style={styles.modalBtn}>
+                <Text style={styles.modalBtnText}>Save</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={hidden} style={styles.modalBtn}>
+                <Text style={styles.modalBtnText}>Cancel</Text>
+                </TouchableOpacity>
+            </View>
         </View>
         </Modal>
     );
@@ -57,6 +59,9 @@ const styles = StyleSheet.create({
     modalBtnText: {
         color: 'white',
         fontSize: 16,
+    },
+    row: {
+        flexDirection: "row",
     },
 });
 
